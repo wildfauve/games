@@ -1,0 +1,5 @@
+<%= form_for(@player) do |f| %>
+   <%= f.label :name, class: "right inline", title: "A name the employee, must be unique", data: {tooltip: true } %>
+   <%= f.text_field :name %>
+   <%= f.submit 'Submit', :class => 'button small' %>
+<% end %>

@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+   <div class="panel-heading">Players</div>
+
+   <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>      
+        </tr>
+      </thead>
+      <tbody>
+         <% for player in @players %>         
+            <tr>
+               <td>
+                  <%= link_to player.name, player_path(player)%>
+               </td>
+               <td>
+                  <button type="button" class="btn btn-default btn-lg   ">
+                     <%= link_to "Show",  player_path(player)%>
+                  </button>
+               </td>
+            </tr>
+         <% end %>
+      </tbody>
+   </table>
+</div>
