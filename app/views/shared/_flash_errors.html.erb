@@ -1,0 +1,12 @@
+<% if flash[:errors]%>
+	<div class="alert alert-error">
+		<p class="lead"><%= pluralize(flash[:errors].count, "error") %> found:</p>
+		<ul>
+			<% flash[:errors].each do |model, messages| %>
+            <% messages.each do |attribute, msg| %>
+               <li><%= "#{model}: #{attribute}: #{msg}" %></li>
+            <% end %>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

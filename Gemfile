@@ -29,7 +29,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'mongoid', github: 'mongoid/mongoid'
 
 gem "less-rails"
-gem "twitter-bootstrap-rails"
+
+gem 'simple_form', '~> 3.1.0.rc1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

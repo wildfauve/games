@@ -1,0 +1,13 @@
+<tr>
+   <td>Final</td>
+   <% for player in game.players %>
+      <% player_score = hand.score(player: player)%>
+      <td>
+         <% if player_score.player_id == game.winner_id%>
+            <span class="label label-danger">
+               <span class="glyphicon glyphicon-ok">Winner</span>           
+            </span>
+         <% end %>
+      </td>
+   <% end %>
+</tr>

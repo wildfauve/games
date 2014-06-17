@@ -9,6 +9,7 @@ class Player
   validates_uniqueness_of :name
   
   has_and_belongs_to_many :games
+  
 
   def self.create_it(params)
     player = self.new(params)
@@ -21,5 +22,12 @@ class Player
     save
   end
   
+  def number_of_wins
+    Game.where(winner_id: self.id).count
+  end
+  
+  def played
+    self.games.count
+  end
 
 end

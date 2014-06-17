@@ -1,0 +1,15 @@
+<%= simple_form_for [@game, @hand], as: 'hand',
+  defaults: { label: false },
+  html: { class: 'form-inline' },
+  wrapper_mappings: {
+    boolean: :vertical_boolean
+  } do |f| %>
+   <% for player in @game.players %>
+        <%= f.simple_fields_for player.name.to_sym do |sf| %>
+           <%= sf.input :score, placeholder: "Score", label: player.name %>
+           <%= sf.hidden_field :player_id, value: player.id %>        
+      <% end %>
+   <% end %>
+
+  <%= f.button :submit%>
+<% end %>

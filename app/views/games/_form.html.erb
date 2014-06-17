@@ -1,6 +1,18 @@
-<%= form_for(@game) do |f| %>
-   <%= f.label :play_date %>
-   <%= f.text_field :play_date %>
-   <%= f.select(:game_type, options_for_select(game_types_select, @game.game_type), include_blank: false, :prompt => "Select a Type") %>   
-   <%= f.submit 'Submit'  %>
+<div class='alert alert-info fade in' data-alert='alert'>
+   <h3>Games</h3>
+</div>
+
+<%= simple_form_for @game,  as: 'game', html: { class: 'form-horizontal' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
+   <%= render partial: 'shared/flash_errors'%>
+   <%= f.input :play_date, placeholder: "Enter Play Date"%>
+   <%= f.input :game_type, collection: Game.game_types %>
+   <%= f.association :players, label_method: :name, value_method: :id %>   
+   <%= f.button :submit %>
 <% end %>

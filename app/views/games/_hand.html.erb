@@ -1,0 +1,26 @@
+<tr>
+   <td><%= @rules.hand_name(hand: hand)%></td>
+   <% for player in @game.players %>
+      <% player_score = hand.score(player: player)%>
+      <td>
+         <% if player_score.hand_winner%>
+            <div class="alert alert-warning">
+         <% end %>
+            <p>
+               <span class="label label-info"><%= player_score.score %></span>
+               <span class="label label-success"><%= player_score.accumulate %></span>
+               <% if player_score.achieved %>
+                  <span class="label label-primary">
+                     <span class="glyphicon glyphicon-ok"><%= @rules.obtained(sym: player_score.obtained)%></span>
+                  </span>             
+               <% end %>
+               <span class="label label-warning">
+                  <span class="glyphicon glyphicon-ok"><%= @rules.next_to_obtain(hand: hand, hands: @game.hands, player: player)%></span>
+               </span>                         
+            </p>
+         <% if player_score.hand_winner%>
+            </div>
+         <% end %>
+      </td>
+   <% end %>
+</tr>
