@@ -1,4 +1,6 @@
 class GameRules
+  
+  include Publisher
     
   def self.rules_factory(game: nil)
     game.to_s.split("_").collect(&:capitalize).join.constantize.new

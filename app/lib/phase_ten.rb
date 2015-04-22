@@ -12,8 +12,8 @@ class PhaseTen < GameRules
       r7: {name: "Run of Seven", short_name: "Run 7"},      
       r8: {name: "Run of Eight", short_name: "Run 8"},      
       r9: {name: "Run of Nine", short_name: "Run 9"},      
-      c7: {name: "Seven of One Colour", short_name: "7 Colour"},            
       s4s4: {name: "Two Sets of Four", short_name: "2 Sets of 4"},            
+      c7: {name: "Seven of One Colour", short_name: "7 Colour"},             
       s5s2: {name: "Set of Five, Set of Two", short_name: "Set of 5, Set of 2"},
       s5s3: {name: "Set of Five, Set of Three", short_name: "Set of 5, Set of 3"}
     }
@@ -38,9 +38,10 @@ class PhaseTen < GameRules
     @@obtains
   end
   
-  def process_hand(current: nil, hands: nil)
+  def process_hand(current: nil, hands: nil, game: nil)
     @valid = true
     @we_have_a_winner = []
+    @game = game
     #super if hands.empty?
     raise if !current
     @seq = current.seq
@@ -50,6 +51,7 @@ class PhaseTen < GameRules
     self.accumulate(current: current, hands: hands_list)
     self.hand_winner(current: current)
     self.achieves(current: current, hands: hands_list)
+    self.hand_time(current: current, hands: hands_list)
     !@we_have_a_winner.empty? ? @winner = determine_who_won(current: current) : @winner = nil
     @valid = true
     self
@@ -77,7 +79,7 @@ class PhaseTen < GameRules
       if current.seq == 1
         player_score.accumulate = player_score.score
       else
-        last_hand_score =  hands.select {|h| h.seq == current.seq - 1}.first.score(player: player_score.related_player)
+        last_hand_score =  hands.select {|h| h.seq == current.seq - 1}.first.score(player: player_score.player)
         last_hand_score.accumulate.nil? ? player_score.accumulate = player_score.score : player_score.accumulate = last_hand_score.accumulate + player_score.score  
       end
     end
@@ -128,6 +130,14 @@ class PhaseTen < GameRules
   def determine_who_won(current: nil)
     possible = current.scores.select {|s| @we_have_a_winner.include?(s.player_id)}
     possible.min {|s1, s2| s1.accumulate <=> s2.accumulate}.player_id
+  end
+  
+  def hand_time(current: nil, hands: nil)
+    previous = hands.select {|h| h.seq == current.seq - 1}
+    previous = @game.created_at if !previous
+    t = Time.now
+    
+    binding.pry
   end
   
   

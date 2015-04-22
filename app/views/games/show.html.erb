@@ -6,6 +6,8 @@
             <p><%= link_to "New Hand", new_game_hand_path(@game), class: "btn btn-primary", role: "button", remote: true %></p>
          <% end %>
          <p><%= link_to 'Re_Calc', recalc_game_path(@game), class: "btn btn-primary", method: :put%>
+         <p><%= link_to 'TIme Line', game_time_line_dashboards_path(game: @game), class: "btn btn-primary", remote: true %>
+            
       </div>
       <div class="col-md-4">
          <p><%= @game.winner.name if @game.has_a_winner%></p>
@@ -15,32 +17,35 @@
          <% if @rules.has_obtains%>
             <% @rules.obtains.each do |key, names| %>
                <% @rules.highest_obtains(hands: @game.hands) == key ? highlight = "warning" : highlight = "primary"  %>
-               <p><span class="label label-<%=highlight%>"><%= names[:name]%></scan></p>
+               <h4><span class="label label-<%=highlight%>"><%= names[:name]%></scan></h4>
             <% end %>
          <% end %>
       </div>      
    </div>
+   
    <div class="row">
-<table class="table">
-   <thead>
-     <tr>
-        <th>Hand</th>
-         <% for player in @game.players %>
-            <th><%= player.name %></th>
-         <% end %>
-     </tr>
-   </thead>
-   <tbody>
-      <%= render partial: 'hand', locals: {hand: @game.hands.last}%>
-   </tbody>
-</table>
-      
+      <table class="table">
+         <thead>
+           <tr>
+              <th>Hand</th>
+               <% for player in @game.players %>
+                  <th><%= player.name %></th>
+               <% end %>
+           </tr>
+         </thead>
+         <tbody>
+            <%= render partial: 'hand', locals: {hand: @game.hands.last} if @game.hands.count > 0 %>
+         </tbody>
+      </table>  
    </div>
+   
 </div>
 
 <%= render partial: 'shared/flash_errors'%>
 
 <div id="new_hand"></div>
+
+<div id="timeline_chart"></div>
 
 <div class="jumbotron">
 

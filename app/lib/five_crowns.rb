@@ -50,7 +50,7 @@ class FiveCrowns < GameRules
       if current.seq == 1
         player_score.accumulate = player_score.score
       else
-        last_hand_score =  hands.select {|h| h.seq == current.seq +  - 1}.first.score(player: player_score.related_player)
+        last_hand_score =  hands.select {|h| h.seq == current.seq +  - 1}.first.score(player: player_score.player)
         last_hand_score.accumulate.nil? ? player_score.accumulate = player_score.score : player_score.accumulate = last_hand_score.accumulate + player_score.score  
       end
     end

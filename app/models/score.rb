@@ -21,7 +21,7 @@ class Score
     self
   end
   
-  def related_player
+  def player
     Player.find(self.player_id)
   end
   

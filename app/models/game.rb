@@ -50,5 +50,13 @@ class Game
     Player.find(winner_id)
   end
   
+  def duration
+    if self.hands.present?
+      Time.at(self.hands.last.updated_at - self.play_date).utc.strftime("%H:%M:%S")
+    else
+      Time.at(Time.now - self.play_date).utc.strftime("%H:%M:%S")
+    end
+  end
+  
 
 end

@@ -15,7 +15,7 @@
                   </span>             
                <% end %>
                <span class="label label-warning">
-                  <span class="glyphicon glyphicon-ok"><%= @rules.next_to_obtain(hand: hand, hands: @game.hands, player: player)%></span>
+                  <span ><%= @rules.next_to_obtain(hand: hand, hands: @game.hands, player: player)%></span>
                </span>                         
             </p>
          <% if player_score.hand_winner%>

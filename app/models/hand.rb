@@ -5,6 +5,7 @@ class Hand
   include Mongoid::Timestamps  
 
   field :seq, type: Integer
+  field :duration, type: Date
 
   embedded_in :game
   

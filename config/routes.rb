@@ -12,5 +12,10 @@ Games::Application.routes.draw do
   
   resources :players
   
+  resources :dashboards do 
+    collection do
+      get 'game_time_line'
+    end
+  end
   
 end
