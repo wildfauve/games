@@ -25,8 +25,8 @@ class FiveCrowns < GameRules
     false
   end
   
-  def process_hand(current: nil, hands: nil)
-    @we_have_a_winner = []
+  def process_hand(current: nil, hands: nil, game: nil)
+    @we_have_a_winner = nil
     raise if !current
     @seq = current.seq
     hands_list = hands.dup << current        
@@ -63,8 +63,13 @@ class FiveCrowns < GameRules
   
   def determine_if_winner(current: nil)
     if current.seq == @@hand_seq.count
+      binding.pry
       @we_have_a_winner = current.scores.min {|s1, s2| s1.accumulate <=> s2.accumulate}.player_id
     end      
+  end
+  
+  def next_to_obtain(hand: nil, hands: nil, player: nil)
+    @hand_seq[hand.seq - 1]
   end
   
   

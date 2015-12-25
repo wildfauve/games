@@ -136,8 +136,6 @@ class PhaseTen < GameRules
     previous = hands.select {|h| h.seq == current.seq - 1}
     previous = @game.created_at if !previous
     t = Time.now
-    
-    binding.pry
   end
   
   
