@@ -5,7 +5,7 @@ class FiveCrowns < GameRules
   @@achieve_threshold = nil
   
     
-  @@hand_seq = ["3 Wild", "4 Wild", "5 Wild", "6 Wild", "7 Wild", "8 Wild", "9 Wild", "J Wild", "Q Wild", "K Wild"]
+  @@hand_seq = ["3 Wild", "4 Wild", "5 Wild", "6 Wild", "7 Wild", "8 Wild", "9 Wild", "10 Wild", "J Wild", "Q Wild", "K Wild"]
   
   #@@hand_seq = ["3 Wild", "4 Wild", "5 Wild"]
   
@@ -63,7 +63,6 @@ class FiveCrowns < GameRules
   
   def determine_if_winner(current: nil)
     if current.seq == @@hand_seq.count
-      binding.pry
       @we_have_a_winner = current.scores.min {|s1, s2| s1.accumulate <=> s2.accumulate}.player_id
     end      
   end
